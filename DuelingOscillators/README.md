@@ -32,7 +32,15 @@ to work.
 	Very annoying, in my opinion, and working on turning that off.
 
 ## Updates
-	1. v0.02
+
+	1. v0.03
+	  1. Added a biquad lowpass filter and slider to control cutoff
+	    * Very simple implementation as this was practice for my midterm project
+		which will be a more feature filled, robust and 24dB/octave lowpass
+
+	  2. Still ugly :,(
+		  
+	2. v0.02
 	  1. Introduced object oriented paradigms to create better SoC and emphasize
 	  DRY principles. All around, the project is much less monolithic than the
 	  first version.
@@ -41,5 +49,7 @@ to work.
 
 	  2. Artefacts produced by moving the second oscillators frequency sliders
 	  has been fixed. This is mostly due to the update on separating concerns.
+
+
 
 Give it a whirl!

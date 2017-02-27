@@ -1,0 +1,65 @@
+﻿Build started 2/26/2017 9:43:03 PM.
+     1>Project "C:\Users\Ed\Documents\JUCE_Projects\JUCE_Projects\LadderFilter\Builds\VisualStudio2015\LadderFilter.vcxproj" on node 2 (Build target(s)).
+     1>ClCompile:
+         C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\x86_amd64\CL.exe /c /I..\..\JuceLibraryCode /I..\..\..\..\..\..\..\..\JUCE\modules /Zi /nologo /W4 /WX- /MP /Ox /GL /D _CRT_SECURE_NO_WARNINGS /D WIN32 /D _WINDOWS /D NDEBUG /D JUCER_VS2015_78A5022=1 /D JUCE_APP_VERSION=1.0.0 /D JUCE_APP_VERSION_HEX=0x10000 /D _WINDLL /Gm- /EHsc /MD /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /GR /Fo"x64\Release\\" /Fd"x64\Release\\vc140.pdb" /Gd /TP /errorReport:prompt ..\..\Source\Filter.cpp ..\..\Source\PluginProcessor.cpp ..\..\Source\PluginEditor.cpp ..\..\JuceLibraryCode\juce_audio_basics.cpp ..\..\JuceLibraryCode\juce_audio_devices.cpp ..\..\JuceLibraryCode\juce_audio_formats.cpp ..\..\JuceLibraryCode\juce_audio_plugin_client_utils.cpp ..\..\JuceLibraryCode\juce_audio_plugin_client_VST2.cpp ..\..\JuceLibraryCode\juce_audio_processors.cpp ..\..\JuceLibraryCode\juce_core.cpp ..\..\JuceLibraryCode\juce_cryptography.cpp ..\..\JuceLibraryCode\juce_data_structures.cpp ..\..\JuceLibraryCode\juce_events.cpp ..\..\JuceLibraryCode\juce_graphics.cpp ..\..\JuceLibraryCode\juce_gui_basics.cpp ..\..\JuceLibraryCode\juce_gui_extra.cpp ..\..\JuceLibraryCode\juce_opengl.cpp ..\..\JuceLibraryCode\juce_video.cpp
+         Filter.cpp
+         PluginProcessor.cpp
+         PluginEditor.cpp
+         juce_audio_basics.cpp
+         juce_audio_devices.cpp
+         juce_audio_formats.cpp
+         juce_audio_plugin_client_utils.cpp
+         juce_audio_plugin_client_VST2.cpp
+     1>..\..\Source\Filter.cpp(61): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+     1>..\..\Source\Filter.cpp(87): warning C4244: 'return': conversion from 'double' to 'float', possible loss of data
+         juce_audio_processors.cpp
+         juce_core.cpp
+     1>..\..\Source\PluginProcessor.cpp(76): warning C4100: 'index': unreferenced formal parameter
+     1>..\..\Source\PluginProcessor.cpp(80): warning C4100: 'index': unreferenced formal parameter
+     1>..\..\Source\PluginProcessor.cpp(85): warning C4100: 'newName': unreferenced formal parameter
+     1>..\..\Source\PluginProcessor.cpp(85): warning C4100: 'index': unreferenced formal parameter
+     1>..\..\Source\PluginProcessor.cpp(92): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+     1>..\..\Source\PluginProcessor.cpp(90): warning C4100: 'samplesPerBlock': unreferenced formal parameter
+     1>..\..\Source\PluginProcessor.cpp(126): warning C4100: 'midiMessages': unreferenced formal parameter
+     1>..\..\Source\PluginProcessor.cpp(166): warning C4100: 'destData': unreferenced formal parameter
+     1>..\..\Source\PluginProcessor.cpp(173): warning C4100: 'sizeInBytes': unreferenced formal parameter
+     1>..\..\Source\PluginProcessor.cpp(173): warning C4100: 'data': unreferenced formal parameter
+         juce_cryptography.cpp
+         juce_data_structures.cpp
+         juce_events.cpp
+         juce_graphics.cpp
+         juce_gui_basics.cpp
+         juce_gui_extra.cpp
+         juce_opengl.cpp
+         juce_video.cpp
+       ResourceCompile:
+         C:\Program Files (x86)\Windows Kits\8.1\bin\x86\rc.exe /D NDEBUG /l"0x0409" /nologo /fo"x64\Release\resources.res" .\resources.rc 
+       Link:
+         C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\x86_amd64\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\Ed\Documents\JUCE_Projects\JUCE_Projects\LadderFilter\Builds\VisualStudio2015\x64\Release\\LadderFilter.dll" /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /PDB:"x64\Release\\LadderFilter.pdb" /SUBSYSTEM:WINDOWS /LARGEADDRESSAWARE /OPT:REF /OPT:ICF /LTCG:incremental /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\Ed\Documents\JUCE_Projects\JUCE_Projects\LadderFilter\Builds\VisualStudio2015\x64\Release\LadderFilter.lib" /MACHINE:X64 /DLL x64\Release\resources.res
+         x64\Release\\Filter.obj
+         x64\Release\\PluginProcessor.obj
+         x64\Release\\PluginEditor.obj
+         x64\Release\\juce_audio_basics.obj
+         x64\Release\\juce_audio_devices.obj
+         x64\Release\\juce_audio_formats.obj
+         x64\Release\\juce_audio_plugin_client_utils.obj
+         x64\Release\\juce_audio_plugin_client_VST2.obj
+         x64\Release\\juce_audio_processors.obj
+         x64\Release\\juce_core.obj
+         x64\Release\\juce_cryptography.obj
+         x64\Release\\juce_data_structures.obj
+         x64\Release\\juce_events.obj
+         x64\Release\\juce_graphics.obj
+         x64\Release\\juce_gui_basics.obj
+         x64\Release\\juce_gui_extra.obj
+         x64\Release\\juce_opengl.obj
+         x64\Release\\juce_video.obj
+            Creating library C:\Users\Ed\Documents\JUCE_Projects\JUCE_Projects\LadderFilter\Builds\VisualStudio2015\x64\Release\LadderFilter.lib and object C:\Users\Ed\Documents\JUCE_Projects\JUCE_Projects\LadderFilter\Builds\VisualStudio2015\x64\Release\LadderFilter.exp
+         Generating code
+         Finished generating code
+         LadderFilter.vcxproj -> C:\Users\Ed\Documents\JUCE_Projects\JUCE_Projects\LadderFilter\Builds\VisualStudio2015\x64\Release\LadderFilter.dll
+     1>Done Building Project "C:\Users\Ed\Documents\JUCE_Projects\JUCE_Projects\LadderFilter\Builds\VisualStudio2015\LadderFilter.vcxproj" (Build target(s)).
+
+Build succeeded.
+
+Time Elapsed 00:00:29.93

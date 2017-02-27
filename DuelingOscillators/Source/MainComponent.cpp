@@ -14,6 +14,7 @@
 
 #include "../JuceLibraryCode/JuceHeader.h"
 #include "Oscillator.h"
+#include "Filter.h"
 
 
 class MainContentComponent   : public AudioAppComponent, public Slider::Listener
@@ -29,20 +30,20 @@ public:
 
 		/***Initialize all components***/
 
+
 		//Frequency Slider of Oscillator 1
 		addAndMakeVisible(freqSliderOsc_1);
-		freqSliderOsc_1.setRange(50, 5000);
+		freqSliderOsc_1.setRange(50, 20000);
 		freqSliderOsc_1.setSkewFactorFromMidPoint(500);
 		freqSliderOsc_1.setTextValueSuffix(" Hz");
 		freqSliderOsc_1.addListener(this); 
 
 		//Frequency Slider of Oscillator 2
 		addAndMakeVisible(freqSliderOsc_2);
-		freqSliderOsc_2.setRange(50, 5000);
+		freqSliderOsc_2.setRange(50, 20000);
 		freqSliderOsc_2.setSkewFactorFromMidPoint(500);
 		freqSliderOsc_2.setTextValueSuffix(" Hz");
 		freqSliderOsc_2.addListener(this);
-
 
 		//Level of Oscillator 1
 		addAndMakeVisible(levelSliderOsc_1);
@@ -57,6 +58,13 @@ public:
 		levelSliderOsc_2.addListener(this);
 		levelSliderOsc_2.setTextBoxStyle(Slider::NoTextBox, false, 0, 0);
 		levelSliderOsc_2.setSliderStyle(Slider::SliderStyle::LinearVertical);
+
+		//Cutoff Slider
+		addAndMakeVisible(cutoffSlider);
+		cutoffSlider.setRange(50.0, 20000.0);
+		cutoffSlider.setSkewFactorFromMidPoint(500);
+		cutoffSlider.setTextValueSuffix("Hz");
+		cutoffSlider.addListener(this);
 
 		//Frequency Slider 1 Label
 		addAndMakeVisible(freqOscLabel_1);
@@ -81,6 +89,7 @@ public:
 		//Title
 		addAndMakeVisible(title);
 		title.setText("Ed-itive Synth", dontSendNotification);
+
     }
 
     ~MainContentComponent()
@@ -96,6 +105,9 @@ public:
 		/*Initialize Oscillators*/
 		oscillator_1.init(sampleRate);
 		oscillator_2.init(sampleRate);
+
+		/*Initialize Filter*/
+		lowPassFilter.init(sampleRate);
 
     }
 
@@ -114,7 +126,10 @@ public:
 			oscillator_1.updateFrequency(bufferToFill.numSamples - sample);
 			oscillator_2.updateFrequency(bufferToFill.numSamples - sample);
 
-			buffer[sample] = currentSample * LEVEL_SAFETY_BLOCK;
+			const double filteredSample = lowPassFilter.applyFilter(currentSample);
+
+			buffer[sample] = filteredSample;				
+
 		}
 
     }
@@ -127,6 +142,7 @@ public:
 		levelSliderOsc_1.removeListener(this);
 		levelSliderOsc_2.removeListener(this);
 
+		lowPassFilter.~Filter();
     }
 
     //==============================================================================
@@ -153,6 +169,11 @@ public:
 		{
 			oscillator_2.setLevel(levelSliderOsc_2.getValue());
 		}
+
+		if (slider = &cutoffSlider)
+		{
+			lowPassFilter.updateCutoff(cutoffSlider.getValue());
+		}
 	}
 
 
@@ -169,7 +190,11 @@ public:
 
 		levelSliderOsc_2.setBoundsRelative(0.75f, 0.5f, 0.125f, 0.4f);
 
+		cutoffSlider.setBoundsRelative(.35f, .80f, 0.4f, 0.125f);
+
 		title.setBoundsRelative(0.4f, 0.01f, 0.5f, 0.2f);
+
+		
     }
 
     void resized() override
@@ -177,6 +202,7 @@ public:
 
 
     }
+
 
 
 private:
@@ -188,6 +214,8 @@ private:
 
 	Slider levelSliderOsc_1;
 	Slider levelSliderOsc_2;
+
+	Slider cutoffSlider;
 
 	Label freqOscLabel_1;
 	Label freqOscLabel_2;
@@ -204,7 +232,10 @@ private:
 	/*Oscillators*/
 	Oscillator oscillator_1;
 	Oscillator oscillator_2;
-	
+
+	/*Filter*/
+	Filter lowPassFilter;
+
 
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (MainContentComponent)
 };

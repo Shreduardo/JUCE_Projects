@@ -23,6 +23,8 @@
             file="Source/MainComponent.cpp"/>
       <FILE id="mBvVp8" name="Main.cpp" compile="1" resource="0" file="Source/Main.cpp"/>
     </GROUP>
+    <FILE id="FtEmCM" name="Filter.cpp" compile="1" resource="0" file="Source/Filter.cpp"/>
+    <FILE id="uO2jBr" name="Filter.h" compile="0" resource="0" file="Source/Filter.h"/>
   </MAINGROUP>
   <EXPORTFORMATS>
     <XCODE_MAC targetFolder="Builds/MacOSX">
