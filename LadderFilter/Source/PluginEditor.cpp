@@ -68,7 +68,7 @@ void LadderFilterAudioProcessorEditor::sliderValueChanged(Slider* slider)
 
 	if (slider == &resonanceDial)
 	{
-		processor.updateFilterResonance(cutoffDial.getValue());
+		processor.updateFilterResonance(resonanceDial.getValue());
 	}
 
 }
