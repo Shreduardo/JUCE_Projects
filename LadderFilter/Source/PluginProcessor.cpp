@@ -31,6 +31,7 @@ LadderFilterAudioProcessor::LadderFilterAudioProcessor()
 
 LadderFilterAudioProcessor::~LadderFilterAudioProcessor()
 {
+	delete[] lowPassFilterArray;
 }
 
 //==============================================================================
@@ -89,8 +90,17 @@ void LadderFilterAudioProcessor::changeProgramName (int index, const String& new
 //==============================================================================
 void LadderFilterAudioProcessor::prepareToPlay (double sampleRate, int samplesPerBlock)
 {
-	lowPassFilter.init(sampleRate);
-	lowPassFilter.calculateBiquad();
+	lowPassFilterArray = new Filter[getNumInputChannels()];
+
+	for (int filterNumber = 0; filterNumber < getNumInputChannels(); ++filterNumber) {
+		lowPassFilterArray[filterNumber] = Filter();
+		lowPassFilterArray[filterNumber].init(sampleRate);
+		lowPassFilterArray[filterNumber].calculateBiquad();
+	}
+
+	//lowPassFilter.init(sampleRate);
+	//lowPassFilter.calculateBiquad();
+
 }
 
 void LadderFilterAudioProcessor::releaseResources()
@@ -143,7 +153,7 @@ void LadderFilterAudioProcessor::processBlock (AudioSampleBuffer& buffer, MidiBu
 		{
 			const float inSample = channelData[sample];
 
-			const float output = lowPassFilter.applyFilter(inSample);
+			const float output = lowPassFilterArray[channel].applyFilter(inSample);
 
 			channelData[sample] = output;
 		}
@@ -179,14 +189,22 @@ void LadderFilterAudioProcessor::setStateInformation (const void* data, int size
 /*Filter Functions=============================================================*/
 void LadderFilterAudioProcessor::updateFilterCutoff(double freq)
 {
-	lowPassFilter.updateCutoff(freq);
-	lowPassFilter.calculateBiquad();
+
+	for (int filterNumber = 0; filterNumber < getNumInputChannels(); ++filterNumber) {
+		lowPassFilterArray[filterNumber].updateCutoff(freq);
+		lowPassFilterArray[filterNumber].calculateBiquad();
+	}
+
 }
 
 void LadderFilterAudioProcessor::updateFilterResonance(double Q)
 {
-	lowPassFilter.updateCutoff(Q);
-	lowPassFilter.calculateBiquad();
+
+	for (int filterNumber = 0; filterNumber < getNumInputChannels(); ++filterNumber) {
+		lowPassFilterArray[filterNumber].updateResonance(Q);
+		lowPassFilterArray[filterNumber].calculateBiquad();
+	}
+
 }
 
 

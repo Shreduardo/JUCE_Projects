@@ -32,7 +32,7 @@ LadderFilterAudioProcessorEditor::LadderFilterAudioProcessorEditor (LadderFilter
 
 	//Resonance Dial
 	resonanceDial.setSliderStyle(Slider::Rotary);
-	resonanceDial.setRange(0, 1);
+	resonanceDial.setRange(0, 1.5);
 	resonanceDial.setTextBoxStyle(Slider::TextEntryBoxPosition::TextBoxBelow, false, 100, 50);
 	resonanceDial.setTextBoxIsEditable(true);
 	resonanceDial.addListener(this);
@@ -43,6 +43,7 @@ LadderFilterAudioProcessorEditor::LadderFilterAudioProcessorEditor (LadderFilter
 
 LadderFilterAudioProcessorEditor::~LadderFilterAudioProcessorEditor()
 {
+	
 }
 
 //==============================================================================
