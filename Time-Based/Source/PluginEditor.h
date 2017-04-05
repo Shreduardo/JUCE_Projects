@@ -18,8 +18,7 @@
 //==============================================================================
 /**
 */
-class TimebasedAudioProcessorEditor  : public AudioProcessorEditor,
-									   public Slider :: Listener
+class TimebasedAudioProcessorEditor  : public AudioProcessorEditor, public Slider :: Listener
 {
 public:
     TimebasedAudioProcessorEditor (TimebasedAudioProcessor&);
@@ -32,6 +31,8 @@ public:
 	void sliderValueChanged(Slider* slider) override;
 
 private:
+    // This reference is provided as a quick way for your editor to
+    // access the processor object that created it.
     TimebasedAudioProcessor& processor;
 
 	Slider delayTimeDial;

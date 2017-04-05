@@ -131,29 +131,28 @@ bool TimebasedAudioProcessor::isBusesLayoutSupported (const BusesLayout& layouts
 
 void TimebasedAudioProcessor::processBlock (AudioSampleBuffer& buffer, MidiBuffer& midiMessages)
 {
-    const int totalNumInputChannels  = getTotalNumInputChannels();
-    const int totalNumOutputChannels = getTotalNumOutputChannels();
+	const int totalNumInputChannels  = getTotalNumInputChannels();
+	const int totalNumOutputChannels = getTotalNumOutputChannels();
 
-    for (int i = totalNumInputChannels; i < totalNumOutputChannels; ++i)
-        buffer.clear (i, 0, buffer.getNumSamples());
+	for (int i = totalNumInputChannels; i < totalNumOutputChannels; ++i)
+		buffer.clear (i, 0, buffer.getNumSamples());
 
-    for (int channel = 0; channel < totalNumInputChannels; ++channel)
-    {
-        float* channelData = buffer.getWritePointer (channel);
+	for (int channel = 0; channel < totalNumInputChannels; ++channel)
+	{
+		float* channelData = buffer.getWritePointer(channel);
 
 		for (int sample = 0; sample < buffer.getNumSamples(); ++sample)
 		{
 			const float output = delayArray[channel].process(channelData[sample]);
-			
+
 			channelData[sample] = output;
 		}
-  
-    }
+	}	
 }
 
 //==============================================================================
-
 /*Delay Functions*/
+
 void TimebasedAudioProcessor::updateDelayTime(double time)
 {
 	for (int delay = 0; delay < getNumInputChannels(); ++delay)
@@ -169,6 +168,8 @@ void TimebasedAudioProcessor::updateDelayFeedback(double feedback)
 		delayArray[delay].updateFeedbackAmount(feedback);
 	}
 }
+
+//==============================================================================
 
 bool TimebasedAudioProcessor::hasEditor() const
 {

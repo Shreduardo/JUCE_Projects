@@ -1,11 +1,11 @@
 /*
-  ==============================================================================
+==============================================================================
 
-    SimpleDelay.cpp
-    Created: 4 Apr 2017 12:01:56am
-    Author:  Ed
+SimpleDelay.cpp
+Created: 4 Apr 2017 12:01:56am
+Author:  Ed
 
-  ==============================================================================
+==============================================================================
 */
 
 #include "SimpleDelay.h"
@@ -13,11 +13,9 @@
 SimpleDelay::SimpleDelay()
 {
 	sampleRate = 0.0;
-	
+
 	delayTime = 0.0;
 	feedbackAmount = 0.0;
-
-	delayBuffer = nullptr; 
 
 	currentIndex = 0;
 	delayIndex = 0;
@@ -25,7 +23,7 @@ SimpleDelay::SimpleDelay()
 
 SimpleDelay::~SimpleDelay()
 {
-	delete[] delayBuffer;
+	
 }
 
 void SimpleDelay::init(double sr)
@@ -60,7 +58,7 @@ double SimpleDelay::process(double input)
 
 	if (delayIndex < 0)
 	{
-		++delayIndex;
+		delayIndex = 0;
 	}
 
 	delayBuffer[currentIndex] = input + (delayBuffer[delayIndex] * feedbackAmount);

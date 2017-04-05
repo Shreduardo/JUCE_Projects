@@ -16,9 +16,9 @@
 TimebasedAudioProcessorEditor::TimebasedAudioProcessorEditor (TimebasedAudioProcessor& p)
     : AudioProcessorEditor (&p), processor (p)
 {
-    setSize (400, 300);
+	setSize (800, 600);
 
-	//Cutoff Dial
+	//Delay Time Dial
 	delayTimeDial.setSliderStyle(Slider::Rotary);
 	delayTimeDial.setRange(0, 2000);
 	delayTimeDial.setTextValueSuffix(" ms");
@@ -28,7 +28,7 @@ TimebasedAudioProcessorEditor::TimebasedAudioProcessorEditor (TimebasedAudioProc
 
 	addAndMakeVisible(delayTimeDial);
 
-	//Resonance Dial
+	//Delay Feedback Dial
 	delayFeedbackDial.setSliderStyle(Slider::Rotary);
 	delayFeedbackDial.setRange(0, 1.0);
 	delayFeedbackDial.setTextBoxStyle(Slider::TextEntryBoxPosition::TextBoxBelow, false, 100, 50);
@@ -40,6 +40,7 @@ TimebasedAudioProcessorEditor::TimebasedAudioProcessorEditor (TimebasedAudioProc
 
 TimebasedAudioProcessorEditor::~TimebasedAudioProcessorEditor()
 {
+
 }
 
 //==============================================================================
@@ -55,6 +56,7 @@ void TimebasedAudioProcessorEditor::resized()
 {
 
 }
+
 
 /*Delay Interaction*/
 void TimebasedAudioProcessorEditor::sliderValueChanged(Slider* slider)

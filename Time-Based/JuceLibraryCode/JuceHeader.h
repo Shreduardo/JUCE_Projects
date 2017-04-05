@@ -10,8 +10,8 @@
 
 */
 
-#ifndef __APPHEADERFILE_CLTVQ3__
-#define __APPHEADERFILE_CLTVQ3__
+#ifndef __APPHEADERFILE_WZFXUN__
+#define __APPHEADERFILE_WZFXUN__
 
 #include "AppConfig.h"
 
@@ -46,4 +46,4 @@ namespace ProjectInfo
 }
 #endif
 
-#endif   // __APPHEADERFILE_CLTVQ3__
+#endif   // __APPHEADERFILE_WZFXUN__
