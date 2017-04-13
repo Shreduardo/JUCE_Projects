@@ -9,21 +9,28 @@ Author:  Ed
 */
 
 #include "SimpleDelay.h"
+#include <stdio.h>
+#include <assert.h>
+
+using namespace std; 
 
 SimpleDelay::SimpleDelay()
 {
 	sampleRate = 0.0;
 
 	delayTime = 0.0;
-	feedbackAmount = 0.0;
+	feedbackAmount = 0.2;
 
-	currentIndex = 0;
-	delayIndex = 0;
+	currentPtr = 0;
+	delayPtr = 0;
+
+	delayTimeInSamples = 0;
+	
 }
 
 SimpleDelay::~SimpleDelay()
 {
-	
+
 }
 
 void SimpleDelay::init(double sr)
@@ -31,14 +38,20 @@ void SimpleDelay::init(double sr)
 	sampleRate = sr;
 
 	bufferSize = 2 * (sampleRate * MAX_DELAY_TIME_MS); //sampleRate * MAX_DELAY_TIME_MS = MAX_DELAY_TIME_SAMPLES
-	delayBuffer = new double[bufferSize];
+	delayBuffer = new double [bufferSize] ();
+
+	updateDelayTime(delayTime);
+	updateFeedbackAmount(feedbackAmount);
 
 }
 
 void SimpleDelay::updateDelayTime(double time)
 {
 	delayTime = time;
-	delayTimeInSamples = delayTime * sampleRate;
+	delayTimeInSamples = (delayTime / 1000) * sampleRate;
+
+	delayPtr = (currentPtr - (delayTimeInSamples));
+	if (delayPtr < 0) delayPtr += bufferSize;
 }
 
 void SimpleDelay::updateFeedbackAmount(double feedback)
@@ -48,20 +61,26 @@ void SimpleDelay::updateFeedbackAmount(double feedback)
 
 double SimpleDelay::process(double input)
 {
-	//i = i % bufferSize
-	if (currentIndex >= bufferSize)
-	{
-		currentIndex = 0;
-	}
 
-	delayIndex = currentIndex - (delayTimeInSamples);
+	write(input);
+	double out = read();
 
-	if (delayIndex < 0)
-	{
-		delayIndex = 0;
-	}
+	++currentPtr;
+	currentPtr = currentPtr % bufferSize;
 
-	delayBuffer[currentIndex] = input + (delayBuffer[delayIndex] * feedbackAmount);
+	++delayPtr;
+	delayPtr = delayPtr % bufferSize;
 
-	return delayBuffer[currentIndex];
+	return out;
+}
+
+double SimpleDelay::read()
+{
+	return delayBuffer[delayPtr];
+}
+
+void SimpleDelay::write(double input)
+{
+	assert(delayBuffer != NULL);
+	delayBuffer[currentPtr] = input + (delayBuffer[delayPtr] * feedbackAmount);
 }

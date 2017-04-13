@@ -13,8 +13,5 @@ audio application development at LUC.
      * 4-Pole Low Pass Filter (Based off Moog VCF)
 
 3. Time_Based
-    * CURRENTLY NOT STABLE
     * Project to hold various time-based effects
       * Plan: Delay, Chorus, Phaser, Flanger
-
-      

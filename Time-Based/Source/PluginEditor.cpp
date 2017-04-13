@@ -30,7 +30,7 @@ TimebasedAudioProcessorEditor::TimebasedAudioProcessorEditor (TimebasedAudioProc
 
 	//Delay Feedback Dial
 	delayFeedbackDial.setSliderStyle(Slider::Rotary);
-	delayFeedbackDial.setRange(0, 1.0);
+	delayFeedbackDial.setRange(0, .99);
 	delayFeedbackDial.setTextBoxStyle(Slider::TextEntryBoxPosition::TextBoxBelow, false, 100, 50);
 	delayFeedbackDial.setTextBoxIsEditable(true);
 	delayFeedbackDial.addListener(this);

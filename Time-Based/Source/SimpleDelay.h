@@ -8,6 +8,7 @@ Author:  Ed
 ==============================================================================
 */
 
+
 #ifndef SIMPLEDELAY_H_INCLUDED
 #define SIMPLEDELAY_H_INCLUDED
 
@@ -21,7 +22,7 @@ public:
 	void updateDelayTime(double time);
 	void updateFeedbackAmount(double feedback);
 
-	double write();
+	void write(double input);
 	double read();
 
 	double process(double input);
@@ -31,17 +32,16 @@ private:
 	double sampleRate;
 
 	double delayTime;
-	double delayTimeInSamples;
+	int delayTimeInSamples;
 	double feedbackAmount;
+
+	const int MAX_DELAY_TIME_MS = 2000;
 
 	double* delayBuffer;
 	int bufferSize;
 
-	const int MAX_DELAY_TIME_MS = 2000;
-
-	int currentIndex;
-	int delayIndex;
-
+	int currentPtr;
+	int delayPtr;
 };
 
 
