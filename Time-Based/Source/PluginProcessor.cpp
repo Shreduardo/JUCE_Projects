@@ -169,6 +169,13 @@ void TimebasedAudioProcessor::updateDelayFeedback(double feedback)
 	}
 }
 
+void TimebasedAudioProcessor::updateInterpolation(SimpleDelay::DelayTimeInterpolation interp)
+{
+	for (int delay = 0; delay < getNumInputChannels(); ++delay)
+	{
+		delayArray[delay].updateDelayTimeInterpolation(interp);
+	}
+}
 //==============================================================================
 
 bool TimebasedAudioProcessor::hasEditor() const

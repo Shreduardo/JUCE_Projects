@@ -27,8 +27,20 @@ public:
 
 	double process(double input);
 
+	enum DelayTimeInterpolation {
+		JUMP,
+		CROSSFADE,
+		PITCH
+	};
+
+	void updateDelayTimeInterpolation(DelayTimeInterpolation);
+	double interpolateDelayTime(double input);
+
 
 private:
+
+	double parameterChangeSmoothing(double input);
+
 	double sampleRate;
 
 	double delayTime;
@@ -42,6 +54,13 @@ private:
 
 	int currentPtr;
 	int delayPtr;
+	int targetDelayPtr;
+
+	double smoothingBuffer;
+	int smoothingPtr;
+
+
+	DelayTimeInterpolation interpolation; 
 };
 
 

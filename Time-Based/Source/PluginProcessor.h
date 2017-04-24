@@ -61,6 +61,8 @@ public:
 	void updateDelayTime(double time);
 	void updateDelayFeedback(double feedback);
 
+	void updateInterpolation(SimpleDelay::DelayTimeInterpolation);
+
 private:
     //==============================================================================
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (TimebasedAudioProcessor)

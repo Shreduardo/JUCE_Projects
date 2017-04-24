@@ -18,7 +18,7 @@
 //==============================================================================
 /**
 */
-class TimebasedAudioProcessorEditor  : public AudioProcessorEditor, public Slider :: Listener
+class TimebasedAudioProcessorEditor  : public AudioProcessorEditor, public Slider :: Listener, public Button :: Listener
 {
 public:
     TimebasedAudioProcessorEditor (TimebasedAudioProcessor&);
@@ -29,6 +29,7 @@ public:
     void resized() override;
 
 	void sliderValueChanged(Slider* slider) override;
+	void buttonClicked(Button* button) override;
 
 private:
     // This reference is provided as a quick way for your editor to
@@ -37,6 +38,10 @@ private:
 
 	Slider delayTimeDial;
 	Slider delayFeedbackDial;
+
+	Label interpolationLabel;
+	TextButton jumpInterpolationButton;
+	TextButton crossfadeInterpolationButton; 
 
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (TimebasedAudioProcessorEditor)
 };
