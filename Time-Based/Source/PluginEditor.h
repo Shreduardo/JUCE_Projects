@@ -38,6 +38,7 @@ private:
 
 	Slider delayTimeDial;
 	Slider delayFeedbackDial;
+	Slider dryWetDial;
 
 	Label interpolationLabel;
 	TextButton jumpInterpolationButton;

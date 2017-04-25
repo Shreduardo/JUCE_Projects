@@ -176,6 +176,14 @@ void TimebasedAudioProcessor::updateInterpolation(SimpleDelay::DelayTimeInterpol
 		delayArray[delay].updateDelayTimeInterpolation(interp);
 	}
 }
+
+void TimebasedAudioProcessor::updateDryWet(double dryWet)
+{
+	for (int delay = 0; delay < getNumInputChannels(); ++delay)
+	{
+		delayArray[delay].updateDryWet(dryWet);
+	}
+}
 //==============================================================================
 
 bool TimebasedAudioProcessor::hasEditor() const

@@ -21,10 +21,12 @@ public:
 
 	void updateDelayTime(double time);
 	void updateFeedbackAmount(double feedback);
+	void updateDryWet(double dryWet);
 
 	void write(double input);
 	double read();
 
+	double calculateDryWetSignal(double dry, double wet);
 	double process(double input);
 
 	enum DelayTimeInterpolation {
@@ -32,16 +34,17 @@ public:
 		CROSSFADE,
 		PITCH
 	};
-
-	void updateDelayTimeInterpolation(DelayTimeInterpolation);
+	
 	double interpolateDelayTime(double input);
-
+	void updateDelayTimeInterpolation(DelayTimeInterpolation);
 
 private:
 
 	double parameterChangeSmoothing(double input);
 
 	double sampleRate;
+
+	double dryWet;
 
 	double delayTime;
 	int delayTimeInSamples;

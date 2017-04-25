@@ -60,6 +60,7 @@ public:
 	/*Handle Delay Functions*/
 	void updateDelayTime(double time);
 	void updateDelayFeedback(double feedback);
+	void updateDryWet(double dryWet);
 
 	void updateInterpolation(SimpleDelay::DelayTimeInterpolation);
 

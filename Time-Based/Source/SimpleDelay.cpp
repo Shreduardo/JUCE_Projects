@@ -54,8 +54,6 @@ void SimpleDelay::init(double sr)
 /*TODO: Parameter smoothing*/
 void SimpleDelay::updateDelayTime(double time)
 {
-	//const double targetDelayTime = time;
-
 	delayTime = time;
 	delayTimeInSamples = (delayTime / 1000) * sampleRate;
 	switch (interpolation)
@@ -81,33 +79,37 @@ void SimpleDelay::updateDelayTime(double time)
 	
 
 }
-
+//=======================================================================================================
 void SimpleDelay::updateFeedbackAmount(double feedback)
 {
 	feedbackAmount = feedback;
 }
 
+void SimpleDelay::updateDelayTimeInterpolation(SimpleDelay::DelayTimeInterpolation newInterpolation)
+{
+	interpolation = newInterpolation;
+}
+
+void SimpleDelay::updateDryWet(double amount)
+{
+	dryWet = amount;
+}
+
+//=======================================================================================================
 double SimpleDelay::process(double input)
 {
 
-	const double out = interpolateDelayTime(input);
+	const double wet = interpolateDelayTime(input);
+	const double out = calculateDryWetSignal(input, wet);
 
 	//const double out = delayBuffer[currentPtr] = input + (delayBuffer[delayPtr] * feedbackAmount);
 
 	++currentPtr;
 	currentPtr = currentPtr % bufferSize;
 
-	//++delayPtr;
-	//delayPtr = delayPtr % bufferSize;
-
 	return out;
 }
 
-
-void SimpleDelay::updateDelayTimeInterpolation(SimpleDelay::DelayTimeInterpolation newInterpolation)
-{
-	interpolation = newInterpolation;
-}
 
 double SimpleDelay::interpolateDelayTime(double input)
 {
@@ -131,7 +133,8 @@ double SimpleDelay::interpolateDelayTime(double input)
 		case CROSSFADE:
 			if (targetDelayPtr != delayPtr) {
 				/* Get crossfade value of samples*/
-				const double crossFade = (delayBuffer[targetDelayPtr] + delayBuffer[delayPtr]) / 10;
+
+				const double crossFade = (delayBuffer[targetDelayPtr] - delayBuffer[delayPtr]) / 10;
 				delayBuffer[currentPtr] = input + (crossFade * feedbackAmount);
 
 				/*Update delay time based on interval multiples of difference*/
@@ -154,17 +157,12 @@ double SimpleDelay::interpolateDelayTime(double input)
 			break;
 	}
 
-	return delayBuffer[currentPtr];
+	return delayBuffer[delayPtr];
 }
 
-/*Simple smoothing algorithm to keep general parameter changes smooth*/
-double SimpleDelay::parameterChangeSmoothing(double input)
+double SimpleDelay::calculateDryWetSignal(double dry, double wet)
 {
-	// 1 Sample delay?
-	const double out = smoothingBuffer;
-	smoothingBuffer = input;
-
-	
-	return out;
-
+	return (dry * (1 - dryWet)) + (wet * dryWet);
 }
+
+//=======================================================================================================

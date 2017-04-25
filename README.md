@@ -15,3 +15,4 @@ audio application development at LUC.
 3. Time_Based
     * Project to hold various time-based effects
       * Plan: Delay, Chorus, Phaser, Flanger
+    * Interpolation control plus basic delay parameters
