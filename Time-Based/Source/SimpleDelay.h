@@ -29,28 +29,25 @@ public:
 	double calculateDryWetSignal(double dry, double wet);
 	double process(double input);
 
-	enum DelayTimeInterpolation {
+	enum DelayTimeSmoothing {
 		JUMP,
 		CROSSFADE,
 		PITCH
 	};
 	
-	double interpolateDelayTime(double input);
-	void updateDelayTimeInterpolation(DelayTimeInterpolation);
+	double smoothDelayTime(double input);
+	void updateDelayTimeInterpolation(DelayTimeSmoothing);
 
 private:
-
-	double parameterChangeSmoothing(double input);
-
 	double sampleRate;
 
 	double dryWet;
 
-	double delayTime;
-	int delayTimeInSamples;
-	double feedbackAmount;
-
+	double delayTimeInMS;
+	double delayTimeInSamples;
 	const int MAX_DELAY_TIME_MS = 2000;
+
+	double feedbackAmount;
 
 	double* delayBuffer;
 	int bufferSize;
@@ -59,11 +56,18 @@ private:
 	int delayPtr;
 	int targetDelayPtr;
 
-	double smoothingBuffer;
-	int smoothingPtr;
+	double interpolate();
+
+	//One-Pole for parameter smoothing
+	double a0;
+	double b1;
+	double z;
+	double SMOOTHING_TIME_IN_SAMPLES;
 
 
-	DelayTimeInterpolation interpolation; 
+
+	double lfo;
+	DelayTimeSmoothing smoothing; 
 };
 
 

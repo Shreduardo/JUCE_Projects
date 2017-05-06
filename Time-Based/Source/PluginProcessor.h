@@ -62,7 +62,7 @@ public:
 	void updateDelayFeedback(double feedback);
 	void updateDryWet(double dryWet);
 
-	void updateInterpolation(SimpleDelay::DelayTimeInterpolation);
+	void updateInterpolation(SimpleDelay::DelayTimeSmoothing);
 
 private:
     //==============================================================================

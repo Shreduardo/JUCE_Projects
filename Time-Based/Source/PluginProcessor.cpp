@@ -169,7 +169,7 @@ void TimebasedAudioProcessor::updateDelayFeedback(double feedback)
 	}
 }
 
-void TimebasedAudioProcessor::updateInterpolation(SimpleDelay::DelayTimeInterpolation interp)
+void TimebasedAudioProcessor::updateInterpolation(SimpleDelay::DelayTimeSmoothing interp)
 {
 	for (int delay = 0; delay < getNumInputChannels(); ++delay)
 	{

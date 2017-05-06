@@ -112,11 +112,11 @@ void TimebasedAudioProcessorEditor::buttonClicked(Button* button)
 {
 	if (button == &jumpInterpolationButton)
 	{
-		processor.updateInterpolation(SimpleDelay::DelayTimeInterpolation::JUMP);
+		processor.updateInterpolation(SimpleDelay::DelayTimeSmoothing::JUMP);
 	}
 
 	if (button == &crossfadeInterpolationButton)
 	{
-		processor.updateInterpolation(SimpleDelay::DelayTimeInterpolation::CROSSFADE);
+		processor.updateInterpolation(SimpleDelay::DelayTimeSmoothing::CROSSFADE);
 	}
 }
